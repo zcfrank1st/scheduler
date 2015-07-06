@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fanli.dataplatform.scheduler.core.dao.InstanceDAO">
+    <resultMap id="instRela" type="instanceRela">
+        <result property="instanceId" column="task_status_id"/>
+        <result property="taskId" column="task_id"/>
+        <result property="preInstanceId" column="pre_sts_id"/>
+        <result property="preId" column="pre_id"/>
+        <result property="timestamp" column="time_stamp"/>
+    </resultMap>
+
+	<resultMap id="inst" type="instance" >
+        <id property="instanceId"   column="task_status_id"  />
+        <result property="taskId"          column="task_id"         />
+        <result property="taskName"        column="task_name"       />
+        <result property="taskGroupId"    column="task_group_id"   />
+        <result property="resource"        column="resource"    />
+        <result property="command"         column="command"        />
+        <result property="logPath"         column="log_path"        />
+        <result property="cycle"            column="cycle"           />
+        <result property="timeId"          column="time_id"         />
+        <result property="status"           column="status"          />
+        <result property="ifWait"          column="if_wait"         />
+        <result property="ifRecall"        column="if_recall"       />
+        <result property="ifPre"           column="if_pre"          />
+        <result property="priority"         column="priority"        />
+        <result property="recallNum"       column="recall_num"      />
+        <result property="runNum"          column="run_num"         />
+        <result property="recallInterval"  column="recall_interval" />
+        <result property="recallLimit"     column="recall_limit"    />
+        <result property="startTime"       column="start_time"      />
+        <result property="endTime"         column="end_time"        />
+        <result property="timestamp"       column="time_stamp"      />
+        <result property="type"             column="type"            />
+        <result property="calDt"           column="cal_dt"          />
+        <result property="freq"             column="freq"            />
+        <result property="owner"            column="owner"           />
+        <result property="triggerTime"     column="trigger_time"    />
+        <result property="waitCode"        column="wait_code"       />
+        <result property="recallCode"      column="recall_code"     />
+        <result property="successCode"     column="success_code"    />
+        <result property="jobCode"         column="job_code"        />
+        <result property="runningPrio"     column="running_prio"    />
+        <result property="timeout"          column="timeout"         />
+        <result property="taskCommitter"    column="task_committer"  />
+    </resultMap>
+
+    <insert id="saveInstance" parameterType="instance">
+	  insert into etl_task_status(
+        task_status_id,task_id,task_name,task_group_id,resource,
+        command,log_path,cycle,time_id,status,
+        if_wait,if_recall,if_pre,priority,recall_num,
+        run_num,recall_interval,recall_limit,start_time,end_time,
+        time_stamp,type,cal_dt,freq,owner,
+        trigger_time,wait_code,recall_code,success_code,job_code,
+        running_prio,timeout)
+        values(
+        #{instanceId},#{taskId},#{taskName},#{taskGroupId},#{resource},
+        #{command},#{logPath},#{cycle},#{timeId},#{status},
+        #{ifWait},#{ifRecall},#{ifPre},#{priority},#{recallNum},
+        #{runNum},#{recallInterval},#{recallLimit},#{startTime},#{endTime},
+        #{timestamp},#{type},#{calDt},#{freq},#{owner},
+        #{triggerTime},#{waitCode},#{recallCode},#{successCode},#{jobCode},
+        #{runningPrio},#{timeout})
+	</insert>
+
+    <update id="saveInstanceRela" parameterType="java.util.List">
+        insert into etl_taskrela_status
+        (task_status_id,task_id,pre_sts_id,pre_id,time_stamp)
+        values
+        <foreach item="item" index="index" collection="list"
+                 separator=",">
+            (#{item.instanceId},#{item.taskId},#{item.preInstanceId},#{item.preId},#{item.timestamp})
+        </foreach>
+    </update>
+
+    <select id="getFailInstanceList" resultMap="inst">
+		select * from etl_task_status where status = #{status} and if_recall = 1
+	</select>
+
+    <select id="getInitInstanceList" resultMap="inst">
+		select * from etl_task_status where status = #{status} and trigger_time &lt;= #{triggerTime}
+	</select>
+
+    <update id="updateInstnaceStatus">
+        update etl_task_status set status = #{status} where task_status_id=#{instanceId}
+    </update>
+
+    <update id="updateInstEndStatus" >
+        update etl_task_status set status = #{status},end_time=#{time},job_code=#{jobCode} where task_status_id=#{instanceId}
+    </update>
+
+    <update id="updateInstRecall">
+        update etl_task_status set status = #{status},recall_num=recall_num+1 where task_status_id=#{instanceId}
+    </update>
+
+    <update id="updateInstnaceRunning">
+        update etl_task_status set status = #{status},run_num=run_num+1,start_time=#{time},end_time=null where task_status_id=#{instanceId}
+    </update>
+
+    <update id="updateInstnaceListStatus">
+        update etl_task_status set status = #{status} where status = #{originStatus}
+    </update>
+
+    <update id="resetInstance">
+        update etl_task_status set status = #{status} where status in (#{status1},#{status2})
+    </update>
+
+    <select id="getRelaInstanceList" resultMap="inst">
+        select a.pre_status_id task_status_id,b.task_id,b.task_name,b.status From etl_taskrela_status a left join etl_task_status b
+        on a.task_status_id = b.task_status_id where a.task_status_id=#{instanceId}
+    </select>
+
+    <select id="getInstanceInfo" resultMap="inst">
+		select * from etl_task_status a where task_status_id = #{instanceId}
+	</select>
+
+    <select id="getReadyInstanceList" resultMap="inst" >
+		select * from etl_task_status a where status = #{status} order by running_prio desc,run_num,time_id,priority,rand()
+	</select>
+
+    <select id="getReadyPreInstanceList" resultMap="inst">
+		select * from etl_task_status a where status = #{status} and task_status_id like 'pre_%' order by running_prio desc,run_num,time_id,prio_lvl,rand()
+	</select>
+
+
+</mapper>
