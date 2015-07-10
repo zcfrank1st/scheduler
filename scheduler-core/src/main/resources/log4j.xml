@@ -77,25 +77,25 @@
         </filter>
     </appender>
 
-    <appender name="dqcFile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="${HOME}/dwarch/log/scheduler/dqc.log"/>
-        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
-        <param name="Append" value="true"/>
-        <param name="Encoding" value="UTF8"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %-5p [%F:%L] - %m%n"/>
-        </layout>
-        <filter class="org.apache.log4j.varia.LevelRangeFilter">
-            <param name="LevelMin" value="info"/>
-            <param name="LevelMax" value="error"/>
-        </filter>
-    </appender>
+    <!--<appender name="dqcFile" class="org.apache.log4j.DailyRollingFileAppender">-->
+        <!--<param name="file" value="${HOME}/dwarch/log/scheduler/dqc.log"/>-->
+        <!--<param name="DatePattern" value="'.'yyyy-MM-dd"/>-->
+        <!--<param name="Append" value="true"/>-->
+        <!--<param name="Encoding" value="UTF8"/>-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern" value="%d %-5p [%F:%L] - %m%n"/>-->
+        <!--</layout>-->
+        <!--<filter class="org.apache.log4j.varia.LevelRangeFilter">-->
+            <!--<param name="LevelMin" value="info"/>-->
+            <!--<param name="LevelMax" value="error"/>-->
+        <!--</filter>-->
+    <!--</appender>-->
 
     <!-- apache包要输出error以上等级的日志 -->
-    <logger name="org.apache">
-        <level value="ERROR"/>
-        <appender-ref ref="dqcFile" />
-    </logger>
+    <!--<logger name="org.apache">-->
+        <!--<level value="ERROR"/>-->
+        <!--<appender-ref ref="dqcFile" />-->
+    <!--</logger>-->
 
     <logger name="org.springframework">
         <level value="WARN"/>
@@ -105,10 +105,10 @@
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="com.dianping.dqc">
-        <level value="INFO"/>
-        <appender-ref ref="dqcFile" />
-    </logger>
+    <!--<logger name="com.dianping.dqc">-->
+        <!--<level value="INFO"/>-->
+        <!--<appender-ref ref="dqcFile" />-->
+    <!--</logger>-->
 
 
     <!--
@@ -131,10 +131,11 @@
     -->
     <root>
         <priority value="warn"/>
-        <appender-ref ref="filelog"/>
-        <!--<appender-ref ref="output"/>-->
-        <appender-ref ref="errorfile"/>
-        <appender-ref ref="warn"/>
+        <!--<appender-ref ref="filelog"/>-->
+        <!--<appender-ref ref="errorfile"/>-->
+        <!--<appender-ref ref="warn"/>-->
         <appender-ref ref="ConsoleAppender"/>
+
+        <!--<appender-ref ref="output"/>-->
     </root>
 </log4j:configuration>

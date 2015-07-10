@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 source /etc/profile
 
 #path="/data/deploy/dwarch/bin/Scheduling/bin"

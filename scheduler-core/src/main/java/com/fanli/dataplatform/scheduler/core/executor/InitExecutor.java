@@ -137,7 +137,7 @@ public class InitExecutor {
         return result;
     }
 
-    private InstanceDO generateInstance(TaskDO task,Map<String,TaskDO> taskMap, List<TaskRelaDO> relaList, Date triggerTime) {
+    private InstanceDO generateInstance(TaskDO task,Map<Integer,TaskDO> taskMap, List<TaskRelaDO> relaList, Date triggerTime) {
         String instanceId = null, cycle = null, command = null,
                  logPath = null, calDt = null;
         Integer status = null;

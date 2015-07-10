@@ -92,7 +92,7 @@
 
     <bean id="exceptionDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface"
-                  value="com.fanli.dataplatform.scheduler.core.ExceptionDAO"/>
+                  value="com.fanli.dataplatform.scheduler.core.dao.ExceptionDAO"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 

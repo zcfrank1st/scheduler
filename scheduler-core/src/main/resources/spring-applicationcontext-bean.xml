@@ -24,7 +24,7 @@
         <constructor-arg ref="taskThreadPool"/>
     </bean>
     <!--<bean id="preExecute" class="com.dianping.data.warehouse.executer.PreJobExecuter">-->
-    <!--<constructor-arg ref="taskThreadPool"/>-->
+        <!--<constructor-arg ref="taskThreadPool"/>-->
     <!--</bean>-->
 
     <bean id="init" class="com.fanli.dataplatform.scheduler.core.executor.InitExecutor">
@@ -34,6 +34,8 @@
     <bean id="timeout" class="com.fanli.dataplatform.scheduler.core.executor.TimeoutExecutor"/>
     <bean id="wait" class="com.fanli.dataplatform.scheduler.core.executor.WaitExecutor"/>
     <bean id="recall" class="com.fanli.dataplatform.scheduler.core.executor.RecallExecutor"/>
+
+    <bean id="exceptionAnalyze" class="com.fanli.dataplatform.scheduler.core.utils.ExceptionAnalyze"/>
 
     <bean id="initService"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

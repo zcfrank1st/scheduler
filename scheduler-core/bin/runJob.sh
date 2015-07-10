@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 source /etc/profile
 
 run_path="${deploy_home}/halley"

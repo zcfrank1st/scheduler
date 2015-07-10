@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 source /etc/profile
 
 path="${deploy_home}/dwarch/bin/halley"
