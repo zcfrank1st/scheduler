@@ -168,18 +168,18 @@ public class PreInitExecutor {
         String currTime = DateFormatUtils.getFormatter().format(new Date());
 
         //todo
-        //command = StringUtils.isBlank(task.getCommand()) ? task.getCommand() : Utilities.ParameterUtils.resourceParamHandle(DateUtils.getReplaceCal(task.getCommand(), task.getOffsetType(), task.getOffset(), triggerTime))
-//                .replace("${task_id}", String.valueOf(task.getTaskId()))
-//                .replace("${instance_id}", instanceId)
-//                .replace("${unix_timestamp}", String.valueOf(triggerTime.getTime() / 1000));
+        command = StringUtils.isBlank(task.getCommand()) ? task.getCommand() : Utilities.ParameterUtils.resourceParamHandle(DateUtils.getReplaceCal(task.getCommand(), "offset", task.getOffset(), triggerTime))
+                .replace("${task_id}", String.valueOf(task.getTaskId()))
+                .replace("${instance_id}", instanceId)
+                .replace("${unix_timestamp}", String.valueOf(triggerTime.getTime() / 1000));
 
         cycle = DateUtils.getDay10(triggerTime);
         String lastDay = DateUtils.getLastDay10(triggerTime);
-//todo
-//        logPath = new StringBuilder(Utilities.ParameterUtils.resourceParamHandle(task.getLogHome()))
-//                .append(File.separator).append(task.getLogFile().trim()).append(".")
-//                .append(instanceId).append(".").append(DateUtils.getDay8()).toString();
-//        calDt = DateUtils.get_cal_dt(lastDay, task.getOffsetType(), task.getOffset());
+        //todo
+        logPath = new StringBuilder(Utilities.ParameterUtils.resourceParamHandle(task.getLogFile()))
+                .append(File.separator).append(task.getLogFile().trim()).append(".")
+                .append(instanceId).append(".").append(DateUtils.getDay8()).toString();
+        calDt = DateUtils.get_cal_dt(lastDay, "offset", task.getOffset());
 
         InstanceDO inst = new InstanceDO();
         inst.setInstanceId(instanceId);
