@@ -174,9 +174,9 @@ public class TaskValidator {
         if(rtn5[1] != null){
             builder.append(rtn5[1]);
         }
-        if(rtn6[1] != null){
-            builder.append(rtn6[1]);
-        }
+//        if(rtn6[1] != null){
+//            builder.append(rtn6[1]);
+//        }
 
         String msg = null;
         if(!StringUtils.isBlank(builder.toString())){
@@ -187,8 +187,8 @@ public class TaskValidator {
                 rtn2[0].equals("1") &&
                 rtn3[0].equals("1") &&
                 //rtn4[0].equals("1") &&
-                rtn5[0].equals("1") &&
-                rtn6[0].equals("1");
+                rtn5[0].equals("1"); // &&
+                //rtn6[0].equals("1");
         return new String[]{flag?"1":"0",msg};
     }
 }

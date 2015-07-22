@@ -83,8 +83,9 @@
     <!--trigger-->
     <bean id="initTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="initService"/>
-        <property name="cronExpression" value="10 0-59/10 * * * ?"/>
-        <!--<property name="cronExpression" value="*/10 * * * * ?"/>-->
+        <!--<property name="cronExpression" value="10 0-59/10 * * * ?"/>-->
+        <property name="cronExpression" value="*/10 * * * * ?"/>
+        <!-- 上述property for test -->
     </bean>
 
     <bean id="executeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">

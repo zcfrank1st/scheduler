@@ -205,6 +205,7 @@ public class InitExecutor {
         inst.setTimestamp(currTime);
         inst.setJobCode(CoreConst.DEFAULT_TASK_JOBCODE);
         inst.setConcurrency(task.getConcurrency());
+        inst.setResource(task.getResource());
 
         List<InstanceRelaDO> instRelaList = new ArrayList<InstanceRelaDO>();
         if (relaList == null) {

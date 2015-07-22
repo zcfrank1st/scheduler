@@ -6,8 +6,6 @@ import com.fanli.dataplatform.scheduler.client.domain.TaskReturnDO;
 import com.fanli.dataplatform.scheduler.core.common.CoreConst;
 import com.fanli.dataplatform.scheduler.core.dao.InstanceDAO;
 import com.fanli.dataplatform.scheduler.core.domain.ExceptionAlertDO;
-import com.fanli.dataplatform.scheduler.core.external.DQCExecuterImpl;
-import com.fanli.dataplatform.scheduler.core.external.ExternalExecuter;
 import com.fanli.dataplatform.scheduler.core.resource.ResourceManager2;
 import com.fanli.dataplatform.scheduler.core.utils.DateFormatUtils;
 import com.fanli.dataplatform.scheduler.core.utils.ExceptionAnalyze;
@@ -62,10 +60,10 @@ public class Task2 implements Runnable {
                 this.recoredInternalLog(inst, rtn);
                 return;
             } else {
-                logger.warn(inst.getInstanceId() + "(" + inst.getTaskName() + "record external log");
-                ExternalExecuter executor = new DQCExecuterImpl();
-                TaskReturnDO rtnObj = executor.execute(inst);
-                this.recoredExternalLog(inst, rtnObj);
+//                logger.warn(inst.getInstanceId() + "(" + inst.getTaskName() + "record external log");
+//                ExternalExecuter executor = new DQCExecuterImpl();
+//                TaskReturnDO rtnObj = executor.execute(inst);
+                this.recoredInternalLog(inst, rtn);
                 return;
             }
         } catch (Exception e) {
