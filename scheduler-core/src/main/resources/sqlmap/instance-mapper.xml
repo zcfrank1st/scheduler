@@ -68,7 +68,7 @@
 
     <update id="saveInstanceRela" parameterType="java.util.List">
         insert into etl_taskrela_status
-        (task_status_id,task_id,pre_sts_id,pre_id,time_stamp)
+        (task_status_id,task_id,pre_status_id,pre_id,time_stamp)
         values
         <foreach item="item" index="index" collection="list"
                  separator=",">
