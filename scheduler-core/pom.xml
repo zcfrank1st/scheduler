@@ -32,6 +32,20 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -227,7 +241,7 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <property name="build.base.dir" value="halley"/>
+                                <property name="build.base.dir" value="scheduler"/>
                                 <property name="classes.dir" value="target/classes"/>
                                 <property name="lib.dir" value="${build.base.dir}/lib"/>
                                 <property name="bin.dir" value="${build.base.dir}/bin"/>
@@ -255,20 +269,20 @@
                                 <chmod file="${bin.dir}/*.sh" perm="755"/>
                                 <chmod file="${bin.dir}/detail_script/*.sh" perm="755"/>
 
-                                <jar jarfile="${build.base.dir}/lib/halley-0.1.0.jar" basedir="${classes.dir}">
+                                <jar jarfile="${build.base.dir}/lib/scheduler-0.1.0.jar" basedir="${classes.dir}">
                                 </jar>
 
-                                <dependencyfilesets prefix="halley."/>
+                                <dependencyfilesets prefix="scheduler."/>
 
                                 <copy todir="${lib.dir}" flatten="true">
-                                    <fileset refid="halley.maven.project.dependencies"/>
+                                    <fileset refid="scheduler.maven.project.dependencies"/>
                                 </copy>
 
                                 <delete>
                                     <fileset dir="${lib.dir}" includes="**/xercesImpl-2.6.2.jar"/>
                                 </delete>
 
-                                <tar destfile="${release.dir}/halley.tar" basedir="${build.base.dir}"/>
+                                <tar destfile="${release.dir}/scheduler.tar" basedir="${build.base.dir}"/>
                                 <delete dir="${build.base.dir}" includeEmptyDirs="true"/>
                             </target>
                         </configuration>
