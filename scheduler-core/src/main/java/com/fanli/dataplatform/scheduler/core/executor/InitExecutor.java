@@ -166,8 +166,7 @@ public class InitExecutor {
 
         //todo
         logPath = new StringBuilder(Utilities.ParameterUtils.resourceParamHandle(task.getLogFile()))
-                .append(File.separator).append(task.getLogFile().trim()).append(".")
-                .append(instanceId).append(".").append(DateUtils.getDay8()).toString();
+                .append(File.separator).append(instanceId).append(".").append(DateUtils.getDay8()).append(".log").toString();
 
         //todo
         //calDt = DateUtils.get_cal_dt(lastDay, task.getOffsetType(), task.getOffset());

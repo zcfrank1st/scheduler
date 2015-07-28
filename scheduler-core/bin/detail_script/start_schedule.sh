@@ -11,6 +11,8 @@ export LANG="zh_CN.utf8"
 export conf_path="${run_path}/conf"
 export cfg_props="conf.properties"
 
+export deploy_home=/home/hadoop/scheduler-core
+
 opt=" -Xmx4024M -Xss2048K"
 cmd="${JAVA_HOME}/bin/java -classpath \"${run_path}/lib/*:${run_path}/conf/*\" ${opt} com.fanli.dataplatform.scheduler.core.executor.StartScheduler"
 

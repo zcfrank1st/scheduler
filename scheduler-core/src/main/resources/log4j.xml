@@ -16,7 +16,7 @@
     </appender>
 
     <appender name="filelog" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${HOME}/log/scheduler/info.log"/>
+        <param name="File" value="/home/hadoop/scheduler-core/log/scheduler/info.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <param name="Append" value="true"/>
         <param name="Encoding" value="UTF8"/>
@@ -31,7 +31,7 @@
     </appender>
 
     <appender name="output" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="${HOME}/log/scheduler/debug.log"/>
+        <param name="file" value="/home/hadoop/scheduler-core/log/scheduler/debug.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <param name="Append" value="true"/>
         <param name="Encoding" value="UTF8"/>
@@ -46,7 +46,7 @@
     </appender>
 
     <appender name="warn" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="${HOME}/log/scheduler/warn.log"/>
+        <param name="file" value="/home/hadoop/scheduler-core/log/scheduler/warn.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <param name="Append" value="true"/>
         <param name="Encoding" value="UTF8"/>
@@ -64,7 +64,7 @@
     </appender>
 
     <appender name="errorfile" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="${HOME}/log/scheduler/error.log"/>
+        <param name="file" value="/home/hadoop/scheduler-core/log/scheduler/error.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <param name="Append" value="true"/>
         <param name="Encoding" value="UTF8"/>
@@ -131,9 +131,9 @@
     -->
     <root>
         <priority value="warn"/>
-        <!--<appender-ref ref="filelog"/>-->
-        <!--<appender-ref ref="errorfile"/>-->
-        <!--<appender-ref ref="warn"/>-->
+        <appender-ref ref="filelog"/>
+        <appender-ref ref="errorfile"/>
+        <appender-ref ref="warn"/>
         <appender-ref ref="ConsoleAppender"/>
 
         <!--<appender-ref ref="output"/>-->
