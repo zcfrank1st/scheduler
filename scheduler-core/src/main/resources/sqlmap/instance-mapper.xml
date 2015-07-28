@@ -109,8 +109,7 @@
     </update>
 
     <select id="getRelaInstanceList" resultMap="inst">
-        select a.pre_status_id task_status_id,b.task_id,b.task_name,b.status From etl_taskrela_status a left join etl_task_status b
-        on a.task_status_id = b.task_status_id where a.task_status_id=#{instanceId}
+        select * from etl_task_status where task_id in (select pre_id from etl_taskrela_status where task_status_id=#{instanceId})
     </select>
 
     <select id="getInstanceInfo" resultMap="inst">

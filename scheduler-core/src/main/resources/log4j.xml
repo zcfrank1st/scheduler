@@ -97,13 +97,13 @@
         <!--<appender-ref ref="dqcFile" />-->
     <!--</logger>-->
 
-    <logger name="org.springframework">
-        <level value="WARN"/>
-    </logger>
+    <!--<logger name="org.springframework">-->
+        <!--<level value="WARN"/>-->
+    <!--</logger>-->
 
-    <logger name="com.dianping">
-        <level value="DEBUG"/>
-    </logger>
+    <!--<logger name="com.dianping">-->
+        <!--<level value="DEBUG"/>-->
+    <!--</logger>-->
 
     <!--<logger name="com.dianping.dqc">-->
         <!--<level value="INFO"/>-->
@@ -130,7 +130,7 @@
     </logger>
     -->
     <root>
-        <priority value="warn"/>
+        <priority value="info"/>
         <appender-ref ref="filelog"/>
         <appender-ref ref="errorfile"/>
         <appender-ref ref="warn"/>
