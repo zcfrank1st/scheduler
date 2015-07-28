@@ -44,8 +44,9 @@ public class Task2 implements Runnable {
     @Override
     public void run() {
         logger.info(inst.getInstanceId() + "(" + inst.getTaskName() + ") execute thread starts");
+        String currTime = DateFormatUtils.getFormatter().format(new Date());
+        Integer rtn = this.executeTask();
         try {
-            Integer rtn = this.executeTask();
             logger.warn(inst.getInstanceId() + "(" + inst.getTaskName() + ") rtn :" + rtn);
             //suspend任务的时候，直接返回，不需要修改数据库
             InstanceDO checkedInst = instDAO.getInstanceInfo(inst.getInstanceId());
@@ -67,6 +68,8 @@ public class Task2 implements Runnable {
                 return;
             }
         } catch (Exception e) {
+            this.instDAO.updateInstEndStatus(inst.getInstanceId(), Const.JOB_STATUS.JOB_FAIL.getValue(),
+                    currTime, rtn);
             logger.error(inst.getInstanceId() + "(" + inst.getTaskName() + ") execute thread error", e);
         } finally {
             ResourceManager2.outQueue(inst);
