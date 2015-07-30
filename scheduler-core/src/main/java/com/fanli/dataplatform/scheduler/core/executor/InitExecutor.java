@@ -160,7 +160,7 @@ public class InitExecutor {
                 .replace("${task_id}", String.valueOf(task.getTaskId()))
                 .replace("${instance_id}", instanceId)
                 .replace("${unix_timestamp}", String.valueOf(triggerTime.getTime() / 1000))
-                .replace("${date}", String.valueOf(new DateTime().toString("yyyy-MM-dd")));
+                .replace("${date}", String.valueOf(new DateTime().minusDays(1).toString("yyyy-MM-dd")));
 
 
         cycle = DateUtils.getDay10(triggerTime);
