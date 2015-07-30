@@ -15,6 +15,7 @@ import com.fanli.dataplatform.scheduler.core.utils.TaskUtils;
 import com.fanli.dataplatform.scheduler.core.utils.Utilities;
 import com.fanli.dataplatform.scheduler.core.validator.TaskValidator;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -171,7 +172,8 @@ public class PreInitExecutor {
         command = StringUtils.isBlank(task.getCommand()) ? task.getCommand() : Utilities.ParameterUtils.resourceParamHandle(DateUtils.getReplaceCal(task.getCommand(), "offset", task.getOffset(), triggerTime))
                 .replace("${task_id}", String.valueOf(task.getTaskId()))
                 .replace("${instance_id}", instanceId)
-                .replace("${unix_timestamp}", String.valueOf(triggerTime.getTime() / 1000));
+                .replace("${unix_timestamp}", String.valueOf(triggerTime.getTime() / 1000))
+                .replace("${date}", String.valueOf(new DateTime().toString("yyyy-MM-dd")));
 
         cycle = DateUtils.getDay10(triggerTime);
         String lastDay = DateUtils.getLastDay10(triggerTime);
